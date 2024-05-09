@@ -183,6 +183,9 @@ function connectToAvatarService() {
 }
 
 window.startSession = () => {
+  var username = document.getElementById('username').value;
+  var password = document.getElementById('password').value;
+  console.log("Starting session with username: " + username + " and password: " + password)
   var iconElement = document.createElement("i");
   iconElement.className = "fa fa-spinner fa-spin";
   iconElement.id = "loadingIcon"
@@ -208,9 +211,9 @@ window.startSession = () => {
 }
 
 async function greeting() {
-  addToConversationHistory("Hello, my name is Lisa. How can I help you?", "light")
+  addToConversationHistory(`Hello ${username.value}, my name is Lisa. How can I help you?`, "light")
 
-  let spokenText = "<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xmlns:mstts='https://www.w3.org/2001/mstts' xml:lang='en-US'><voice xml:lang='en-US' xml:gender='Female' name='en-US-JennyNeural'>Hello, my name is Lisa. How can I help you?</voice></speak>"
+  let spokenText = `<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xmlns:mstts='https://www.w3.org/2001/mstts' xml:lang='en-US'><voice xml:lang='en-US' xml:gender='Female' name='en-US-JennyNeural'>Hello ${username.value}, my name is Lisa. How can I help you?</voice></speak>`
   avatarSynthesizer.speakSsmlAsync(spokenText, (result) => {
     if (result.reason === SpeechSDK.ResultReason.SynthesizingAudioCompleted) {
       console.log("Speech synthesized to speaker for text [ " + spokenText + " ]. Result ID: " + result.resultId)
@@ -392,3 +395,4 @@ function makeBackgroundTransparent(timestamp) {
 
   window.requestAnimationFrame(makeBackgroundTransparent)
 }
+
