@@ -299,6 +299,7 @@ window.startRecording = () => {
   recognizer.startContinuousRecognitionAsync();
 
   console.log('Recording started.');
+  //console.log('Recording started.');
 }
 
 window.stopRecording = () => {
